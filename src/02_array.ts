@@ -21,7 +21,16 @@
  *  _.chunk(["a", "b", "c", "d"], 3) => [["a", "b", "c"], ["d"]]
  *  _.chunk(["a", "b", "c"]) => [["a"], ["b"], ["c"]]
  * */
-export function chunk() {
+export function chunk(value: any[], splitSize: number = 1): any[][] {
+  let retValue: any[][] = [];
+  let inputLen: number = value.length;
+  let i: number = 0;
+  do {
+    let last = i + splitSize
+    retValue.push(value.slice(i, last));
+    i = last;
+  } while (i < inputLen);
+  return retValue;
 }
 
 /**
@@ -37,7 +46,10 @@ export function chunk() {
  * _.compact([1, 0, 2, 0, 3]) => [1, 2, 3]
  * _.compact([1, undefined, NaN, null, 0, 2, 3]) => [1, 2, 3]
  */
-export function compact() {
+export function compact(value: any[]): any[] {
+  return value.filter((value) => {
+    return value;
+  })
 }
 
 /**
@@ -48,7 +60,8 @@ export function compact() {
  *  _.head([1, 2, 3]) => 1
  *  _.head([]) => undefined
  */
-export function head() {
+export function head(value: any[]): any {
+  return value[0];
 }
 
 /**
@@ -59,7 +72,8 @@ export function head() {
  *  _.initial<number>([1, 2, 3]) => [1, 2]
  *
  */
-export function initial() {
+export function initial(value: any[]): any[] {
+  return value.slice(0, value.length - 1);
 }
 
 /**
@@ -71,7 +85,8 @@ export function initial() {
  * _.last([]) => undefined
  *
  */
-export function last() {
+export function last(value: any[]): any {
+  return value[value.length - 1];
 }
 
 /**
@@ -84,7 +99,8 @@ export function last() {
  * _.drop([1, 2, 3, 4], 2) => [3, 4]
  * _.drop([1, 2, 3, 4]) => [2, 3, 4]
  */
-export function drop() {
+export function drop(value: any[], count: number = 1): any[] {
+  return value.slice(count, value.length);
 }
 
 /**
@@ -97,7 +113,8 @@ export function drop() {
  * _.dropRight([1, 2, 3, 4]) => [1, 2, 3]
  *
  */
-export function dropRight() {
+export function dropRight(value: any[], count: number = 1): any[] {
+  return value.slice(0, value.length - count);
 }
 
 interface DropWhilePredicate<T> {
